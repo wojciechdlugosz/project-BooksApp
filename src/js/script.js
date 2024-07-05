@@ -10,6 +10,8 @@
   function render(){
 
     for(let book of dataSource.books){
+      book.ratingBgc = determineRatingBgc(book.rating);
+      book.ratingWidth = book.rating * 10;
       //console.log(book);
       const generatedHTML = bookTemplate(book);
       //console.log(generatedHTML);
@@ -85,6 +87,18 @@
       } else if(!shouldBeHidden){
         filteredBooks.classList.remove('hidden'); // remove class hidden when filter fits to book
       }
+    }
+  }
+
+  function determineRatingBgc(rating){ // determine rating color
+    if(rating < 6) {
+      return 'linear-gradient(to bottom,  #fefcea 0%, #f1da36 100%)';
+    } else if(rating > 6 && rating <= 8) {
+      return 'linear-gradient(to bottom, #b4df5b 0%,#b4df5b 100%)';
+    } else if(rating > 8 && rating <= 9) {
+      return 'linear-gradient(to bottom, #299a0b 0%, #299a0b 100%)';
+    } else if(rating > 9) {
+      return 'linear-gradient(to bottom, #ff0084 0%,#ff0084 100%)';
     }
   }
 
