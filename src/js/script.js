@@ -31,13 +31,22 @@
       bookCover.addEventListener('dblclick', function(event){
         event.preventDefault();
 
-        // add class favorite to clicked book
-        bookCover.classList.add('favorite');
-
-        // add this book id to array
         let bookId = bookCover.getAttribute('data-id');
-        favoriteBooks.push(bookId);
-        //console.log(favoriteBooks);
+
+        // check if book is or is not in favorite array
+        if (!favoriteBooks.includes(bookId)){
+          // add class favorite to clicked book
+          bookCover.classList.add('favorite');
+          // add this book id to array
+          favoriteBooks.push(bookId);
+          console.log(favoriteBooks);
+        } else if (favoriteBooks.includes(bookId)) {
+          const indexOfBook = favoriteBooks.indexOf(bookId);
+          favoriteBooks.splice(indexOfBook, 1);
+          bookCover.classList.remove('favorite');
+          console.log(favoriteBooks);
+        }
+
       });
     }
   }
