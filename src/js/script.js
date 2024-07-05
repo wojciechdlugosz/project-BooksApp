@@ -24,31 +24,29 @@
   const favoriteBooks = [];
 
   function initActions(){
-    const bookCovers = booksList.querySelectorAll('.book__image');
-    //console.log(bookCovers);
+    // add event listener to whole book list
+    booksList.addEventListener('dblclick', function(event){
+      const clickedBook = event.target.closest('a');
+      console.log(clickedBook);
 
-    for(let bookCover of bookCovers){
-      bookCover.addEventListener('dblclick', function(event){
-        event.preventDefault();
+      event.preventDefault();
 
-        let bookId = bookCover.getAttribute('data-id');
+      let bookId = clickedBook.getAttribute('data-id');
 
-        // check if book is or is not in favorite array
-        if (!favoriteBooks.includes(bookId)){
-          // add class favorite to clicked book
-          bookCover.classList.add('favorite');
-          // add this book id to array
-          favoriteBooks.push(bookId);
-          console.log(favoriteBooks);
-        } else if (favoriteBooks.includes(bookId)) {
-          const indexOfBook = favoriteBooks.indexOf(bookId);
-          favoriteBooks.splice(indexOfBook, 1);
-          bookCover.classList.remove('favorite');
-          console.log(favoriteBooks);
-        }
-
-      });
-    }
+      // check if book is or is not in favorite array
+      if (!favoriteBooks.includes(bookId)){
+        // add class favorite to clicked book
+        clickedBook.classList.add('favorite');
+        // add this book id to array
+        favoriteBooks.push(bookId);
+        console.log(favoriteBooks);
+      } else if (favoriteBooks.includes(bookId)) {
+        const indexOfBook = favoriteBooks.indexOf(bookId);
+        favoriteBooks.splice(indexOfBook, 1);
+        clickedBook.classList.remove('favorite');
+        console.log(favoriteBooks);
+      }
+    });
   }
 
   function init(){
